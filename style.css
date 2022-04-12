@@ -14,12 +14,22 @@ body {
     margin: 0;
 }
 
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
+}
+
 .container {
     background-color: white;
     height: 100vh;
     width: min(800px, 100%);
     display: grid;
     grid-template-rows: 1fr 8fr;
+    position: relative;
 }
 
 .header {
@@ -81,4 +91,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.add-book {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: #90B494;
+
+    bottom: 50px;
+    right: 50px
 }
