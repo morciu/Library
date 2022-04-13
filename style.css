@@ -88,3 +88,22 @@ button {
     bottom: 50px;
     right: 50px
 }
+
+.add-menu {
+    position: absolute;
+    background-color: wheat;
+    height: 60%;
+    width: min(500px, 100%);
+    left: 0;
+    right: 0;
+    top: 10%;
+    margin: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: absolute;
+}

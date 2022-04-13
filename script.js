@@ -1,3 +1,7 @@
+// Controlls
+const addBookBtn = document.querySelector('#add-book');
+const addMenu = document.querySelector(".add-menu");
+
 // Store books in an array called library
 let myLibrary = [];
 
@@ -25,3 +29,17 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 // Open Add Menu
+addBookBtn.addEventListener('click', () => {
+    // Check if Add Menu is visible
+    if (addMenu.classList.contains('hidden')) {
+        replaceClass(addMenu, 'hidden', 'visible');
+    } else {
+        replaceClass(addMenu, 'visible', 'hidden');
+    }
+})
+
+// Helpers
+function replaceClass(element, unwanted, wanted) {
+    element.classList.remove(unwanted);
+    element.classList.add(wanted);
+}
