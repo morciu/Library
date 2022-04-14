@@ -31,21 +31,18 @@ function addBookToLibrary(title, author, pages, read) {
 // Open Add Menu
 addBookBtn.addEventListener('click', () => {
     // Check if Add Menu is visible
-    if (addMenu.classList.contains('hidden')) {
-        replaceClass(addMenu, 'hidden', 'visible');
-    } else {
-        replaceClass(addMenu, 'visible', 'hidden');
-    }
+    popupMenu();
 })
 
 // Add new book
 document.querySelector('#get-user-input').addEventListener('click', () => {
     let newBook = getNewBook();
-    if (newBook.title === '' || newBook.author === '' || !Number.isInteger(newBook.pages)) {
+    if (!checkInput(newBook)) {
         console.log("error");
     }
     else {
-        console.log(newBook);
+        addBookToLibrary(newBook.title, newBook.author, newBook.pages, newBook.read);
+        popupMenu();
     }
 })
 
@@ -73,4 +70,41 @@ function getCheckBoxVal(checkbox) {
         return true;
     }
     return false;
+}
+
+function checkInput(input) {
+    let valid = true;
+    let titleInput = document.querySelector('#input-title');
+    let authorInput = document.querySelector('#input-author');
+    let pagesInput = document.querySelector('#input-pages');
+    if (input.title === '') {
+        titleInput.style.backgroundColor = 'rgb(253, 121, 121)';
+        valid = false;
+    }
+    if (input.author === '') {
+        authorInput.style.backgroundColor = 'rgb(253, 121, 121)';
+        valid = false;
+    }
+    if (!Number.isInteger(input.pages)) {
+        pagesInput.style.backgroundColor = 'rgb(253, 121, 121)';
+        valid = false;
+    }
+    if (valid) {
+        resetInputColor([titleInput, authorInput, pagesInput]);
+    }
+    return valid
+}
+
+function resetInputColor(elementArray) {
+    for (let i in elementArray) {
+        elementArray[i].style.backgroundColor = 'white';
+    }
+}
+
+function popupMenu() {
+    if (addMenu.classList.contains('hidden')) {
+        replaceClass(addMenu, 'hidden', 'visible');
+    } else {
+        replaceClass(addMenu, 'visible', 'hidden');
+    }
 }
