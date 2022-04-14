@@ -38,8 +38,39 @@ addBookBtn.addEventListener('click', () => {
     }
 })
 
+// Add new book
+document.querySelector('#get-user-input').addEventListener('click', () => {
+    let newBook = getNewBook();
+    if (newBook.title === '' || newBook.author === '' || !Number.isInteger(newBook.pages)) {
+        console.log("error");
+    }
+    else {
+        console.log(newBook);
+    }
+})
+
+// Get new book
+function getNewBook() {
+    let bookTitle = document.querySelector('#input-title').value;
+    let bookAuthor = document.querySelector('#input-author').value;
+    let bookPages = parseInt(document.querySelector('#input-pages').value);
+    let readStatus = getCheckBoxVal(document.querySelector('#input-read-status'));
+
+    return {title: bookTitle, author: bookAuthor, pages: bookPages, read: readStatus}
+}
+
+// Display book title on hover
+
+
 // Helpers
 function replaceClass(element, unwanted, wanted) {
     element.classList.remove(unwanted);
     element.classList.add(wanted);
+}
+
+function getCheckBoxVal(checkbox) {
+    if (checkbox.checked) {
+        return true;
+    }
+    return false;
 }

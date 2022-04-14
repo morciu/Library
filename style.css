@@ -14,6 +14,16 @@ body {
     margin: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 input {
     -webkit-appearance: none;
     appearance: none;
@@ -26,13 +36,14 @@ input:focus {
 }
 
 #input-read-status {
-    height 100px;
-    width: 50px;
+    height: 2ren;
+    width: 2rem;
     background-color: white;
+    border-radius: 50%;
 }
 
 #input-read-status:checked {
-    background-color: red;
+    background-color: rgb(253, 121, 121);
 }
 
 button {
@@ -121,19 +132,25 @@ button {
     top: 10%;
     margin: auto;
     padding: 32px 24px;
+    border-radius: 12px;
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(6, 1fr);
 }
 
-.add-menu-header {
+.add-menu
+button {
     grid-column: 1 / 3;
+    background-color: #BFC8AD;
+    border-radius: 12px;
 }
 
-.add-menu label {
-    display: inline-block;
-    width: 80px;
+.add-menu-header {
+    grid-column: 1 / 3;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .hidden {
