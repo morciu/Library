@@ -55,6 +55,7 @@ function addBookToLibrary(title, author, pages, read) {
 addBookBtn.addEventListener('click', () => {
     // Check if Add Menu is visible
     popupMenu(addMenu);
+    clearInput();
 })
 
 // Add new book
@@ -68,6 +69,19 @@ document.querySelector('#get-user-input').addEventListener('click', () => {
     }
 })
 
+// Clear Input
+function clearInput() {
+    let titleField = document.querySelector('#input-title');
+    let authorField = document.querySelector('#input-author');
+    let pagesField = document.querySelector('#input-pages');
+    let readCheck = document.querySelector('#input-read-status');
+
+    titleField.value = '';
+    authorField.value = '';
+    pagesField.value = '';
+    readCheck.checked = false;
+}
+
 // Get new book
 function getNewBook() {
     let bookTitle = document.querySelector('#input-title').value;
@@ -77,11 +91,6 @@ function getNewBook() {
 
     return {title: bookTitle, author: bookAuthor, pages: bookPages, read: readStatus}
 }
-
-// Display book title on hover
-// function showOnHover() {
-
-// }
 
 // Helpers
 function replaceClass(element, unwanted, wanted) {
