@@ -67,11 +67,10 @@ button {
 .header {
     background-color: #BFC8AD;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }
 
-.title {
+.bookInfo {
     font-size: var(--title-font);
 }
 

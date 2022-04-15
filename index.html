@@ -9,18 +9,14 @@
     <body>
         <div class="container">
             <div class="header">
-                <div class="title">Library</div>
+                <div class="bookInfo" id="titleDisplay">Title: </div>
+                <div class="bookInfo" id="authorDisplay">Author: </div>
             </div>
             <div class="shelves">
                 <div class="shelf-space">
                     <div class="books">
-                        <div class="book-space occupied">
-                            <div class="book" data-title="Moby Dick"
-                            data-author="Herman Melville" data-pages="634"></div>
-                        </div>
-                        <div class="book-space occupied">
-                            <div class="book"></div>
-                        </div>
+                        <div class="book-space empty"></div>
+                        <div class="book-space empty"></div>
                         <div class="book-space empty"></div>
                         <div class="book-space empty"></div>
                         <div class="book-space empty"></div>
@@ -108,7 +104,7 @@
                     <div class="shelf"></div>
                 </div>
             </div>
-            <div class="add-menu visible">
+            <div class="add-menu hidden">
                 <div class="add-menu-header">Add a book</div>
                 <label for="input-title">Book Title</label>
                 <input type="text" id="input-title">

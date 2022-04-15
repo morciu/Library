@@ -1,7 +1,8 @@
 // Controlls
 const addBookBtn = document.querySelector('#add-book');
 const addMenu = document.querySelector(".add-menu");
-
+const titleSection = document.querySelector('#titleDisplay').innerText;
+const authorSection = document.querySelector('#authorDisplay').innerText;
 // Store books in an array called library
 let myLibrary = [];
 
@@ -26,23 +27,44 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
     const book = new Book(title, author, pages, read);
     myLibrary.push(book);
+
+    // Place book on shelf
+    let bookElement = document.createElement('div');
+    bookElement.className = 'book';
+    bookElement.dataset.title = book.title;
+    bookElement.dataset.author = book.author;
+    bookElement.dataset.pages = book.pages;
+    bookElement.dataset.read = book.read;
+    bookElement.addEventListener('mouseover', () => {
+        document.querySelector('#titleDisplay').innerText += ' ' + book.title;
+        document.querySelector('#authorDisplay').innerText += ' ' + book.author;
+    })
+    bookElement.addEventListener('mouseleave', () => {
+        document.querySelector('#titleDisplay').innerText = 'Title: '
+        document.querySelector('#authorDisplay').innerText = 'Author: '
+    })
+
+    let bookSpace = document.querySelector('.empty');
+    if (bookSpace) {
+        bookSpace.appendChild(bookElement);
+        replaceClass(bookSpace, 'empty', 'occupied')
+    }
 }
 
 // Open Add Menu
 addBookBtn.addEventListener('click', () => {
     // Check if Add Menu is visible
-    popupMenu();
+    popupMenu(addMenu);
 })
 
 // Add new book
 document.querySelector('#get-user-input').addEventListener('click', () => {
     let newBook = getNewBook();
     if (!checkInput(newBook)) {
-        console.log("error");
     }
     else {
         addBookToLibrary(newBook.title, newBook.author, newBook.pages, newBook.read);
-        popupMenu();
+        popupMenu(addMenu);
     }
 })
 
@@ -57,7 +79,9 @@ function getNewBook() {
 }
 
 // Display book title on hover
+// function showOnHover() {
 
+// }
 
 // Helpers
 function replaceClass(element, unwanted, wanted) {
@@ -101,8 +125,8 @@ function resetInputColor(elementArray) {
     }
 }
 
-function popupMenu() {
-    if (addMenu.classList.contains('hidden')) {
+function popupMenu(element) {
+    if (element.classList.contains('hidden')) {
         replaceClass(addMenu, 'hidden', 'visible');
     } else {
         replaceClass(addMenu, 'visible', 'hidden');
