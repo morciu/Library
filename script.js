@@ -3,6 +3,10 @@ const addBookBtn = document.querySelector('#add-book');
 const addMenu = document.querySelector(".add-menu");
 const titleSection = document.querySelector('#titleDisplay').innerText;
 const authorSection = document.querySelector('#authorDisplay').innerText;
+
+// Book colors
+const bookColors = ['#5AA85E', '#CA6636', '#DAC792'];
+
 // Store books in an array called library
 let myLibrary = [];
 
@@ -35,6 +39,8 @@ function addBookToLibrary(title, author, pages, read) {
     bookElement.dataset.author = book.author;
     bookElement.dataset.pages = book.pages;
     bookElement.dataset.read = book.read;
+    bookElement.style.backgroundColor = bookColors[Math.floor(Math.random() * bookColors.length)];
+    console.log(bookElement.backgroundColor);
     bookElement.addEventListener('mouseover', () => {
         document.querySelector('#titleDisplay').innerText += ' ' + book.title;
         document.querySelector('#authorDisplay').innerText += ' ' + book.author;
