@@ -41,6 +41,8 @@ function addBookToLibrary(title, author, pages, read) {
     bookElement.dataset.read = book.read;
     bookElement.style.backgroundColor = bookColors[Math.floor(Math.random() * bookColors.length)];
     console.log(bookElement.backgroundColor);
+
+    // When hovered, display title and author on top of the page
     bookElement.addEventListener('mouseover', () => {
         document.querySelector('#titleDisplay').innerText += ' ' + book.title;
         document.querySelector('#authorDisplay').innerText += ' ' + book.author;
@@ -48,6 +50,27 @@ function addBookToLibrary(title, author, pages, read) {
     bookElement.addEventListener('mouseleave', () => {
         document.querySelector('#titleDisplay').innerText = 'Title: '
         document.querySelector('#authorDisplay').innerText = 'Author: '
+    })
+
+    // When clicked pop up window with all its info
+    bookElement.addEventListener('click', () => {
+        console.log(bookElement);
+        let bookMenu = document.createElement('div');
+
+        let title = document.createElement('div');
+        title.innerText = `Title: ${book.title}`;
+        let author = document.createElement('div');
+        author.innerText = `Author: ${book.author}`;
+        let pages = document.createElement('div');
+        pages.innerText = `Pages: ${book.pages}`;
+        let read = document.createElement('div');
+        read.innerText = `Read: ${book.read ? 'Yes' : 'No'}`;
+        
+
+        bookMenu.append(title, author, pages, read);
+
+        bookMenu.classList = 'pop-menu book-menu';
+        document.body.appendChild(bookMenu);
     })
 
     let bookSpace = document.querySelector('.empty');
