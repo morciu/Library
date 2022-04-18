@@ -25,9 +25,7 @@ let myLibrary = [
                 ];
 
 // Place entire library on the shelves
-for (let book in myLibrary) {
-    placeOnShelf(myLibrary[book], book);
-}
+populateShelves();
 
 // Book object
 function Book(title, author, pages, read) {
@@ -100,14 +98,32 @@ function placeOnShelf(book, index) {
         })
         readDiv.append(read, readChangeBtn);
         
-        // Close Popup
+        // Close Popup and Remove Book
+        let controlsDiv = document.createElement('div');
+        controlsDiv.className = 'controls-div';
+
+        // Close
         let closeBtn = document.createElement('button');
         closeBtn.innerText = "Close"
         closeBtn.addEventListener('click', () => {
             document.body.removeChild(bookMenu);
         })
 
-        bookMenu.append(title, author, pages, readDiv, closeBtn);
+        // Remove
+        let removeBtn = document.createElement('button');
+        removeBtn.innerText = "Discard Book";
+        removeBtn.addEventListener('click', () => {
+            delete myLibrary[index];
+            let books = document.querySelectorAll('.book');
+            books.forEach(item => item.remove());
+            let bookspaces = document.querySelectorAll('.occupied');
+            bookspaces.forEach(space => replaceClass(space, 'occupied', 'empty'));
+            populateShelves();
+        })
+
+        controlsDiv.append(closeBtn, removeBtn);
+
+        bookMenu.append(title, author, pages, readDiv, controlsDiv);
 
         bookMenu.classList = 'pop-menu book-menu';
         document.body.appendChild(bookMenu);
@@ -208,5 +224,11 @@ function popupMenu(element) {
         replaceClass(addMenu, 'hidden', 'visible');
     } else {
         replaceClass(addMenu, 'visible', 'hidden');
+    }
+}
+
+function populateShelves() {
+    for (let book in myLibrary) {
+        placeOnShelf(myLibrary[book], book);
     }
 }
