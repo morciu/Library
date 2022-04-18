@@ -26,7 +26,7 @@ let myLibrary = [
 
 // Place entire library on the shelves
 for (let book in myLibrary) {
-    placeOnShelf(myLibrary[book]);
+    placeOnShelf(myLibrary[book], book);
 }
 
 // Book object
@@ -50,13 +50,14 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
     const book = new Book(title, author, pages, read);
     myLibrary.push(book);
-    placeOnShelf(book);
+    placeOnShelf(book, myLibrary.length-1);
 }
 
 // Place book on shelf
-function placeOnShelf(book) {
+function placeOnShelf(book, index) {
     let bookElement = document.createElement('div');
     bookElement.className = 'book';
+    bookElement.id = index;
     bookElement.dataset.title = book.title;
     bookElement.dataset.author = book.author;
     bookElement.dataset.pages = book.pages;
@@ -75,7 +76,6 @@ function placeOnShelf(book) {
 
     // When clicked pop up window with all its info
     bookElement.addEventListener('click', () => {
-        console.log(bookElement);
         let bookMenu = document.createElement('div');
 
         let title = document.createElement('div');
@@ -85,15 +85,29 @@ function placeOnShelf(book) {
         let pages = document.createElement('div');
         pages.innerText = `Pages: ${book.pages}`;
 
+        // Read / Unread button
         let readDiv = document.createElement('div');
+        readDiv.className = "read-div";
         let read = document.createElement('div');
         read.innerText = `Read: ${book.read ? 'Yes' : 'No'}`;
         let readChangeBtn = document.createElement('button');
         readChangeBtn.innerText = book.read ? 'Unread' : 'Read';
+        readChangeBtn.addEventListener('click', () => {
+            myLibrary[index].read = myLibrary[index].read ? false : true;
+            readChangeBtn.innerText = readChangeBtn.innerText === 'Read' ? 'Unread' : 'Read';
+            read.innerText = read.innerText === 'Read: Yes' ? 'Read: No' : 'Read: Yes';
+
+        })
         readDiv.append(read, readChangeBtn);
         
+        // Close Popup
+        let closeBtn = document.createElement('button');
+        closeBtn.innerText = "Close"
+        closeBtn.addEventListener('click', () => {
+            document.body.removeChild(bookMenu);
+        })
 
-        bookMenu.append(title, author, pages, readDiv);
+        bookMenu.append(title, author, pages, readDiv, closeBtn);
 
         bookMenu.classList = 'pop-menu book-menu';
         document.body.appendChild(bookMenu);
