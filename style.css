@@ -162,6 +162,12 @@ button {
     border-radius: 12px;
 }
 
+.book-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 .add-menu-header {
     grid-column: 1 / 3;
     display: flex;

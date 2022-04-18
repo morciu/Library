@@ -8,7 +8,26 @@ const authorSection = document.querySelector('#authorDisplay').innerText;
 const bookColors = ['#5AA85E', '#CA6636', '#DAC792'];
 
 // Store books in an array called library
-let myLibrary = [];
+let myLibrary = [
+                new Book('Dracula', 'Bram Stoker', 418, false),
+                new Book('Moby Dick', 'Herman Melville', 752, true),
+                new Book('Frankenstein', 'Mary Shelley', 280, true),
+                new Book('The Dog It Was That Died', 'Tom Stoppard', 192, true),
+                new Book('Get in the van', 'Henry Rollins', 247, false),
+                new Book('Heart of Darkness', 'Joseph Conrad', 72, false),
+                new Book('Charlie and the Chocolate Factory', 'Roald Dahl', 176, true),
+                new Book('Great Expectations', 'Charles Dickens', 544, true),
+                new Book('The Adventures of Tom Sawyer', 'Mark Twain', 216, true),
+                new Book('The Turn of the Screw', 'Henry James', 174, true),
+                new Book('Strange Case of Dr Jekyll and Mr Hyde', 'R. L. Stevenson', 141, false),
+                new Book('The Trial', 'Franz Kafka', 106, true),
+                new Book('Bartleby, the Scrivener', 'Herman Melville', 68, false)
+                ];
+
+// Place entire library on the shelves
+for (let book in myLibrary) {
+    placeOnShelf(myLibrary[book]);
+}
 
 // Book object
 function Book(title, author, pages, read) {
@@ -31,8 +50,11 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
     const book = new Book(title, author, pages, read);
     myLibrary.push(book);
+    placeOnShelf(book);
+}
 
-    // Place book on shelf
+// Place book on shelf
+function placeOnShelf(book) {
     let bookElement = document.createElement('div');
     bookElement.className = 'book';
     bookElement.dataset.title = book.title;
@@ -40,7 +62,6 @@ function addBookToLibrary(title, author, pages, read) {
     bookElement.dataset.pages = book.pages;
     bookElement.dataset.read = book.read;
     bookElement.style.backgroundColor = bookColors[Math.floor(Math.random() * bookColors.length)];
-    console.log(bookElement.backgroundColor);
 
     // When hovered, display title and author on top of the page
     bookElement.addEventListener('mouseover', () => {
@@ -63,11 +84,16 @@ function addBookToLibrary(title, author, pages, read) {
         author.innerText = `Author: ${book.author}`;
         let pages = document.createElement('div');
         pages.innerText = `Pages: ${book.pages}`;
+
+        let readDiv = document.createElement('div');
         let read = document.createElement('div');
         read.innerText = `Read: ${book.read ? 'Yes' : 'No'}`;
+        let readChangeBtn = document.createElement('button');
+        readChangeBtn.innerText = book.read ? 'Unread' : 'Read';
+        readDiv.append(read, readChangeBtn);
         
 
-        bookMenu.append(title, author, pages, read);
+        bookMenu.append(title, author, pages, readDiv);
 
         bookMenu.classList = 'pop-menu book-menu';
         document.body.appendChild(bookMenu);
