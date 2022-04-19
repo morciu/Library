@@ -52,7 +52,7 @@ input:focus {
 }
 
 #input-read-status:checked {
-    background-color: rgb(253, 121, 121);
+    background-color: var(--background);
 }
 
 button {
@@ -131,6 +131,7 @@ button {
     background-color: var(--book-info);
     color: var(--background);
     opacity: 0.5;
+    cursor: pointer;
 
     bottom: 50px;
     right: 50px
@@ -168,6 +169,12 @@ button {
     justify-content: space-evenly;
 }
 
+.book-title {
+    font-size: var(--title-font);
+    justify-self: center;
+    align-self: center;
+}
+
 .read-div {
     display: flex;
     justify-content: space-between;
@@ -184,6 +191,7 @@ button {
     display: flex;
     justify-content: center;
     align-content: center;
+    font-size: var(--title-font);
 }
 
 .hidden {

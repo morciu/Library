@@ -77,7 +77,8 @@ function placeOnShelf(book, index) {
         let bookMenu = document.createElement('div');
 
         let title = document.createElement('div');
-        title.innerText = `Title: ${book.title}`;
+        title.className = "book-title";
+        title.innerText = book.title;
         let author = document.createElement('div');
         author.innerText = `Author: ${book.author}`;
         let pages = document.createElement('div');
@@ -106,7 +107,7 @@ function placeOnShelf(book, index) {
         let closeBtn = document.createElement('button');
         closeBtn.innerText = "Close"
         closeBtn.addEventListener('click', () => {
-            document.body.removeChild(bookMenu);
+            bookMenu.parentElement.removeChild(bookMenu);
         })
 
         // Remove
@@ -119,6 +120,7 @@ function placeOnShelf(book, index) {
             let bookspaces = document.querySelectorAll('.occupied');
             bookspaces.forEach(space => replaceClass(space, 'occupied', 'empty'));
             populateShelves();
+            bookMenu.parentElement.removeChild(bookMenu);
         })
 
         controlsDiv.append(closeBtn, removeBtn);
